@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BOM TELAH DIAKTIFKAN</title>
+    <link rel="stylesheet" type="text/css" href="style-timer.css">
+    <!--<script>
+    function hitungMundur() {
+      var tanggalTujuan = new Date("June 14, 2023 00:00:00").getTime(); // Tanggal tujuan hitung mundur
+      var sekarang = new Date().getTime(); // Waktu sekarang
+      var selisih = tanggalTujuan - sekarang; // Selisih antara tanggal tujuan dan waktu sekarang
+
+      // Menghitung hari, jam, menit, dan detik
+      var hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+      var jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+      var detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+      // Menampilkan hasil hitung mundur pada elemen dengan id "hitung-mundur"
+      document.getElementById("hitung-mundur").innerHTML = hari + " hari, " + jam + " jam, " + menit + " menit, " + detik + " detik";
+
+      // Mengulangi fungsi setiap 1 detik (1000 milidetik)
+      setTimeout(hitungMundur, 1000);
+    }
+  // </script>  -->
+</head>
+
+<body onload="hitungMundur()">
+  <h1>BOM TELAH DIAKTIFKAN</h1>
+	<img src="assets/bomb.png">
+  <div id="hitung-mundur"></div>
+  <a href="index.html">DEACTIVE!</a>
+</body>
+</html>
