@@ -18,7 +18,7 @@ a{
 h1{
 	font-family: sans-serif;
 	font-size: 80px;
-    color: #000000;
+    	color: #000000;
 	display: flex;
 	justify-content: center;
 	margin-left: auto;
@@ -26,8 +26,8 @@ h1{
 }
 img{
 	position: relative;
-	width: 40%;
-	height: 40%;
+	width: auto;
+	height: auto;
 	align-content: center;
 	margin: auto;
 	justify-content: center;
