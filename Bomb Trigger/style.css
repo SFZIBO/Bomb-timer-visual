@@ -26,8 +26,8 @@ h1{
 }
 img{
 	position: relative;
-	width: 40%;
-	height: 40%;
+	width: auto;
+	height: auto;
 	align-content: center;
 	margin: auto;
 	justify-content: center;
