@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOMB CONTROL SYSTEM — DETONATION UNIT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="state-standby">
+
+<!-- ─── SCANLINE OVERLAY ─────────────────────────────────────── -->
+<div class="scanlines"></div>
+<div class="vignette"></div>
+
+<!-- ─── STATUS BAR ──────────────────────────────────────────── -->
+<header class="status-bar">
+  <div class="status-left">
+    <span class="blink-dot" id="conn-dot"></span>
+    <span class="mono" id="conn-status">OFFLINE</span>
+  </div>
+  <div class="status-center">
+    <span class="brand-label">TACTICAL DETONATION CONTROL</span>
+  </div>
+  <div class="status-right">
+    <span class="mono" id="sys-clock">--:--:--</span>
+  </div>
+</header>
+
+<!-- ─── MAIN GRID ────────────────────────────────────────────── -->
+<main class="main-grid">
+
+  <!-- COL 1: SENSORS -->
+  <section class="panel sensor-panel">
+    <div class="panel-header"><span class="panel-label">SYS SENSORS</span></div>
+
+    <!-- Temperature -->
+    <div class="sensor-block">
+      <div class="sensor-label">SUHU PERANGKAT</div>
+      <div class="sensor-value-row">
+        <span class="sensor-value mono" id="temp-val">--</span>
+        <span class="sensor-unit">°C</span>
+      </div>
+      <div class="sensor-bar-track">
+        <div class="sensor-bar" id="temp-bar"></div>
+      </div>
+    </div>
+
+    <!-- Stability -->
+    <div class="sensor-block">
+      <div class="sensor-label">KESTABILAN JARINGAN</div>
+      <div class="sensor-value-row">
+        <span class="sensor-value mono" id="stab-val">--</span>
+        <span class="sensor-unit">%</span>
+      </div>
+      <div class="sensor-bar-track">
+        <div class="sensor-bar stable" id="stab-bar"></div>
+      </div>
+    </div>
+
+    <!-- Signal -->
+    <div class="sensor-block">
+      <div class="sensor-label">SIGNAL STRENGTH</div>
+      <div class="signal-bars" id="signal-bars">
+        <div class="sig-bar"></div>
+        <div class="sig-bar"></div>
+        <div class="sig-bar"></div>
+        <div class="sig-bar"></div>
+        <div class="sig-bar"></div>
+      </div>
+    </div>
+
+    <!-- Hazard Level -->
+    <div class="sensor-block">
+      <div class="sensor-label">HAZARD LEVEL</div>
+      <div class="sensor-value-row">
+        <span class="sensor-value mono danger" id="hazard-val">IV</span>
+        <span class="sensor-unit">CRITICAL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COL 2: TIMER (CENTER) -->
+  <section class="panel center-panel">
+    <div class="bomb-status-badge" id="bomb-badge">STANDBY</div>
+
+    <!-- Sonar Radar -->
+    <div class="sonar-wrapper">
+      <canvas id="sonar-canvas" width="260" height="260"></canvas>
+      <div class="sonar-center-label">
+        <div class="mono sm-label">BLAST RADIUS</div>
+        <div class="mono blast-val" id="blast-val">0 m</div>
+      </div>
+    </div>
+
+    <!-- Timer Display -->
+    <div class="timer-display" id="timer-display">
+      <div class="timer-segment">
+        <span class="timer-num mono" id="t-hours">00</span>
+        <span class="timer-sub">JAM</span>
+      </div>
+      <div class="timer-colon mono blink-colon">:</div>
+      <div class="timer-segment">
+        <span class="timer-num mono" id="t-minutes">05</span>
+        <span class="timer-sub">MENIT</span>
+      </div>
+      <div class="timer-colon mono blink-colon">:</div>
+      <div class="timer-segment">
+        <span class="timer-num mono" id="t-seconds">00</span>
+        <span class="timer-sub">DETIK</span>
+      </div>
+    </div>
+
+    <!-- Defuse Code Input -->
+    <div class="defuse-section" id="defuse-area">
+      <div class="defuse-label">MASUKKAN KODE DEFUSE</div>
+      <div class="defuse-dots" id="defuse-dots">
+        <div class="dot" id="d0"></div>
+        <div class="dot" id="d1"></div>
+        <div class="dot" id="d2"></div>
+        <div class="dot" id="d3"></div>
+      </div>
+      <div class="defuse-status mono" id="defuse-status">MENUNGGU INPUT REMOTE...</div>
+    </div>
+
+    <!-- Controls -->
+    <div class="btn-row">
+      <button class="ctrl-btn activate-btn" id="btn-activate" onclick="activateBomb()">
+        <span class="btn-icon">⚡</span> AKTIFKAN
+      </button>
+      <button class="ctrl-btn defuse-btn" id="btn-defuse" onclick="localDefuse()" disabled>
+        <span class="btn-icon">🛡</span> DEFUSE
+      </button>
+      <button class="ctrl-btn reset-btn" id="btn-reset" onclick="resetBomb()">
+        <span class="btn-icon">↺</span> RESET
+      </button>
+    </div>
+  </section>
+
+  <!-- COL 3: ACCESS LOG -->
+  <section class="panel log-panel">
+    <div class="panel-header">
+      <span class="panel-label">ACCESS LOG</span>
+      <span class="log-count mono" id="log-count">0</span>
+    </div>
+    <div class="log-list" id="log-list">
+      <div class="log-empty">Tidak ada aktivitas...</div>
+    </div>
+    <div class="log-footer">
+      <button class="small-btn" onclick="clearLog()">CLEAR</button>
+      <span class="mono sm-label" id="log-footer-time">--</span>
+    </div>
+  </section>
+
+</main>
+
+<!-- ─── DEFUSE RESULT OVERLAY ────────────────────────────────── -->
+<div class="overlay" id="defused-overlay">
+  <div class="overlay-box success-box">
+    <div class="overlay-icon">✔</div>
+    <h2 class="overlay-title">BOM DINONAKTIFKAN</h2>
+    <p class="overlay-sub mono" id="defused-by">--</p>
+    <button class="ctrl-btn reset-btn" onclick="resetBomb()">RESET SISTEM</button>
+  </div>
+</div>
+
+<div class="overlay" id="exploded-overlay">
+  <div class="overlay-box danger-box">
+    <div class="overlay-icon shake-anim">💥</div>
+    <h2 class="overlay-title">DETONATION</h2>
+    <p class="overlay-sub mono">SISTEM TELAH MELEDAK</p>
+    <button class="ctrl-btn reset-btn" onclick="resetBomb()">RESET SISTEM</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

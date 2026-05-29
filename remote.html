@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050709">
+    <title>BOMB REMOTE — DEFUSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="remote.css">
+</head>
+
+<body>
+
+    <!-- ─── SCANLINES ─── -->
+    <div class="scanlines"></div>
+
+    <!-- ─── HEADER ─── -->
+    <header class="r-header">
+        <div class="r-conn-row">
+            <span class="r-dot" id="r-dot"></span>
+            <span class="r-mono r-sm" id="r-conn-text">MENGHUBUNGKAN...</span>
+        </div>
+        <h1 class="r-brand">⬡ BOMB REMOTE</h1>
+        <div class="r-mono r-sm" id="r-clock">--:--:--</div>
+    </header>
+
+    <!-- ─── TIMER MIRROR ─── -->
+    <section class="r-timer-section">
+        <div class="r-timer-label r-mono">WAKTU TERSISA</div>
+        <div class="r-timer-display" id="r-timer">--:--:--</div>
+        <div class="r-status-badge" id="r-badge">STANDBY</div>
+    </section>
+
+    <!-- ─── DEFUSE CODE INPUT ─── -->
+    <section class="r-defuse-section">
+        <div class="r-section-label">KODE DEFUSE</div>
+        <div class="r-code-display" id="r-code-display">
+            <div class="r-code-cell" id="rc0">·</div>
+            <div class="r-code-cell" id="rc1">·</div>
+            <div class="r-code-cell" id="rc2">·</div>
+            <div class="r-code-cell" id="rc3">·</div>
+        </div>
+        <div class="r-defuse-feedback r-mono" id="r-feedback">MASUKKAN 4 DIGIT KODE</div>
+    </section>
+
+    <!-- ─── NUMPAD ─── -->
+    <section class="r-numpad">
+        <div class="r-numpad-grid">
+            <button class="r-key" onclick="pressDigit('1')"><span class="r-key-main">1</span></button>
+            <button class="r-key" onclick="pressDigit('2')"><span class="r-key-main">2</span><span
+                    class="r-key-sub">ABC</span></button>
+            <button class="r-key" onclick="pressDigit('3')"><span class="r-key-main">3</span><span
+                    class="r-key-sub">DEF</span></button>
+            <button class="r-key" onclick="pressDigit('4')"><span class="r-key-main">4</span><span
+                    class="r-key-sub">GHI</span></button>
+            <button class="r-key" onclick="pressDigit('5')"><span class="r-key-main">5</span><span
+                    class="r-key-sub">JKL</span></button>
+            <button class="r-key" onclick="pressDigit('6')"><span class="r-key-main">6</span><span
+                    class="r-key-sub">MNO</span></button>
+            <button class="r-key" onclick="pressDigit('7')"><span class="r-key-main">7</span><span
+                    class="r-key-sub">PQRS</span></button>
+            <button class="r-key" onclick="pressDigit('8')"><span class="r-key-main">8</span><span
+                    class="r-key-sub">TUV</span></button>
+            <button class="r-key" onclick="pressDigit('9')"><span class="r-key-main">9</span><span
+                    class="r-key-sub">WXYZ</span></button>
+            <button class="r-key r-key-clear" onclick="clearCode()"><span class="r-key-main">CLR</span></button>
+            <button class="r-key" onclick="pressDigit('0')"><span class="r-key-main">0</span></button>
+            <button class="r-key r-key-del" onclick="deleteDigit()"><span class="r-key-main">⌫</span></button>
+        </div>
+
+        <!-- DEFUSE SUBMIT -->
+        <button class="r-defuse-btn" id="r-defuse-btn" onclick="submitDefuse()" disabled>
+            <span class="r-btn-icon">🛡</span> DEFUSE BOMB
+        </button>
+    </section>
+
+    <!-- ─── ACTION PANEL ─── -->
+    <section class="r-actions">
+        <button class="r-action-btn r-activate-btn" id="r-activate" onclick="remoteActivate()">
+            ⚡ AKTIFKAN
+        </button>
+        <button class="r-action-btn r-reset-btn" onclick="remoteReset()">
+            ↺ RESET
+        </button>
+    </section>
+
+    <!-- ─── MINI LOG ─── -->
+    <section class="r-log-section">
+        <div class="r-section-label">ACTIVITY LOG</div>
+        <div class="r-log-list" id="r-log-list">
+            <div class="r-log-empty">Tidak ada aktivitas...</div>
+        </div>
+    </section>
+
+    <script src="remote.js"></script>
+</body>
+
+</html>

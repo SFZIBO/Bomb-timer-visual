@@ -1,0 +1,15 @@
+{
+  "name": "bomb-timer-visual",
+  "version": "2.0.0",
+  "description": "Cinematic Bomb Timer — Desktop + Android Remote",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  },
+  "keywords": ["bomb", "timer", "film", "prop"],
+  "license": "MIT"
+}
